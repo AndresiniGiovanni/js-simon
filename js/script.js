@@ -4,13 +4,11 @@
 // Dopo che sono stati inseriti i 5 numeri, il software dice quanti e quali dei numeri da indovinare sono stati individuati.
 
 //aggiungo tag html per visualizzare i numeri.
-
-//creao array per accogliere i 5 numeri randomici.
+//creo array per accogliere i 5 numeri randomici.
 //math random
 //randomNumer();
 let divNum = document.getElementById("numeri");
 let numeriutente = document.getElementById("usernum");
-let button = document.getElementById("btnEsegui");
 let risultato = document.getElementById("risultato");
 let ArrayRandom = [];
 let arrayUser = [];
@@ -19,7 +17,7 @@ let numeroDiNumeri = 5;
 //mi metto 5 numeri dentro una variabile;
 //uso un ciclo while per generare i 5 numeri e popolare l'array;
 //finché numeri.length < 5 continua a girare;
-// genero un numero random dentro al while ;
+//genero un numero random dentro al while ;
 //
 //prendo il div dall'html e assegno una variabile;
 function randomNun() {
@@ -32,76 +30,44 @@ function randomNun() {
   }
   return ArrayRandom;
 }
-randomNun()
+randomNun();
 divNum.innerText = ArrayRandom;
-
-//chiedere i numeri all'utente
-//inserisco un input type text nell'hmtl
-
-//dopo 5 volte dico quanti numeri ha indovinato
 
 function clear() {
   divNum.innerText = "";
 }
 setTimeout(clear, 3000); // function setTimeout di 3 secondi /3000ms/ function nascondere i numeri dopo 3 sec
 
-function type() {
-  inputval = document.getElementById("usernum").value;
+//chiedere i numeri all'utente
+//inserisco un input type text nell'hmtl
+//dopo 5 volte dico quanti numeri ha indovinato
+// FUNZIONE AGGIUNTA NUMERO
+const buttonInvio = document.getElementById("invio"); //bottone di invio dei numeri inseriti dall'utente
+const buttonVerifica = document.getElementById("control"); //bottone di  verifica
+function insertNum() {
+  //funzione di inserimento numeri
+  let valore = parseInt(numeriutente.value);
+  arrayUser.push(valore);
+  console.log(arrayUser);
+  numeriutente.value = "";
 
-  if (arrayUser.length < numeroDiNumeri) {
-    arrayUser.push(inputval);
-    console.log(inputval);
-    const print = document.getElementById("print");
-    print.innerHTML = "numero" + arrayUser;
+  if (arrayUser.length >= numeroDiNumeri) {
+    buttonInvio.classList.add("d-none"); //rimozione e attivazione del bottone
+    buttonVerifica.classList.remove("d-none");
   }
-  usernum.value = "";
 }
+buttonInvio.addEventListener("click", insertNum);
 
-button.addEventListener("click", () => {
-  type();
-});
-
-let counter = 0;
 function controllo() {
+  //funzione di controllo, hai vinto o hai perso
+  //ciclo for per metterli nel div stampando nell'html;
   for (let i = 0; i < ArrayRandom.length; i++) {
     if (arrayUser.includes(ArrayRandom[i])) {
       risultato.innerHTML = "corretto";
     } else {
-      counter++;
       risultato.innerHTML = "hai sbagliato";
     }
   }
 }
-
 console.log(ArrayRandom);
-button.addEventListener("click", controllo);
-
-// NON FUNZIONANTE
-// function inserisci() {
-//   arrayUser.push(numeriutente);
-//   let valore = parseInt(arrayUser.value);
-//   arrayUser.push(valore);
-//   console.log(arrayUser);
-//   arrayUser.value = "";
-// }
-
-//funzione che controlla i numeri inseriti dall'utente
-// function controllo() {
-//   button.removeEventListener("click", controllo);
-//   let win = true;
-//   for (let i = 0; i < numeroDiNumeri; i++) {
-//     if (arrayUser[i] !== ArrayRandom[i]) {
-//       win = false;
-//     //   risultato.innerText = `hai perso`;
-//     } else {
-//       win = true;
-//     //   risultato.innerText = `hai vinto`;
-//     }
-//     console.log(win);
-//   }
-// }
-
-// console.log(ArrayRandom);
-// console.log(numeriutente);
-// console.log(arrayUser);
-// button.addEventListener("click", controllo);
+buttonVerifica.addEventListener("click", controllo);
