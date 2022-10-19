@@ -22,13 +22,17 @@ let numeroDiNumeri = 5;
 // genero un numero random dentro al while ;
 //
 //prendo il div dall'html e assegno una variabile;
-while (ArrayRandom.length < numeroDiNumeri) {
-  let numero = randomNumber(1, 100);
-  if (!ArrayRandom.includes(numero)) {
-    //controllo numeri.includes. if not numeri.includes
-    ArrayRandom.push(numero); //allora numeripush
+function randomNun() {
+  while (ArrayRandom.length < numeroDiNumeri) {
+    let numero = randomNumber(1, 100);
+    if (!ArrayRandom.includes(numero)) {
+      //controllo numeri.includes. if not numeri.includes
+      ArrayRandom.push(numero); //allora numeripush
+    }
   }
+  return ArrayRandom;
 }
+randomNun()
 divNum.innerText = ArrayRandom;
 
 //chiedere i numeri all'utente
@@ -39,33 +43,65 @@ divNum.innerText = ArrayRandom;
 function clear() {
   divNum.innerText = "";
 }
-
 setTimeout(clear, 3000); // function setTimeout di 3 secondi /3000ms/ function nascondere i numeri dopo 3 sec
 
-function inserisci() {
-  arrayUser.push(numeriutente);
-  let valore = parseInt(arrayUser.value);
-  arrayUser.push(valore);
-  console.log(arrayUser);
-  arrayUser.value = "";
+function type() {
+  inputval = document.getElementById("usernum").value;
+
+  if (arrayUser.length < numeroDiNumeri) {
+    arrayUser.push(inputval);
+    console.log(inputval);
+    const print = document.getElementById("print");
+    print.innerHTML = "numero" + arrayUser;
+  }
+  usernum.value = "";
 }
 
-//funzione che controlla i numeri inseriti dall'utente
+button.addEventListener("click", () => {
+  type();
+});
+
+let counter = 0;
 function controllo() {
-  let win;
-  for (let i = 0; i < numeroDiNumeri; i++) {
-    if (arrayUser[i] !== ArrayRandom[i]) {
-      win = false;
-      risultato.innerText = `hai perso`;
+  for (let i = 0; i < ArrayRandom.length; i++) {
+    if (arrayUser.includes(ArrayRandom[i])) {
+      risultato.innerHTML = "corretto";
     } else {
-      win = true;
-      risultato.innerText = `hai vinto`;
+      counter++;
+      risultato.innerHTML = "hai sbagliato";
     }
-    console.log(win);
   }
 }
 
 console.log(ArrayRandom);
-console.log(numeriutente);
-console.log(arrayUser);
 button.addEventListener("click", controllo);
+
+// NON FUNZIONANTE
+// function inserisci() {
+//   arrayUser.push(numeriutente);
+//   let valore = parseInt(arrayUser.value);
+//   arrayUser.push(valore);
+//   console.log(arrayUser);
+//   arrayUser.value = "";
+// }
+
+//funzione che controlla i numeri inseriti dall'utente
+// function controllo() {
+//   button.removeEventListener("click", controllo);
+//   let win = true;
+//   for (let i = 0; i < numeroDiNumeri; i++) {
+//     if (arrayUser[i] !== ArrayRandom[i]) {
+//       win = false;
+//     //   risultato.innerText = `hai perso`;
+//     } else {
+//       win = true;
+//     //   risultato.innerText = `hai vinto`;
+//     }
+//     console.log(win);
+//   }
+// }
+
+// console.log(ArrayRandom);
+// console.log(numeriutente);
+// console.log(arrayUser);
+// button.addEventListener("click", controllo);
