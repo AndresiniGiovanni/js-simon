@@ -63,9 +63,9 @@ function controllo() {
   //ciclo for per metterli nel div stampando nell'html;
   for (let i = 0; i < ArrayRandom.length; i++) {
     if (arrayUser.includes(ArrayRandom[i])) {
-      risultato.innerHTML = "corretto";
+      risultato.innerHTML = "Corretto!";
     } else {
-      risultato.innerHTML = "hai sbagliato";
+      risultato.innerHTML = "Hai sbagliato!";
     }
   }
 }
